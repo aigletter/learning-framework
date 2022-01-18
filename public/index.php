@@ -1,15 +1,13 @@
 <?php
 
-$routes = [
-    'shop',
-    'user',
-    'order'
-];
+include __DIR__ . '/../vendor/autoload.php';
 
-$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-if (!in_array($path, $routes)) {
-    http_response_code(404);
-    die();
-}
+const ROOT_PATH = '/home/aigletter/www/learning-framework';
 
-echo 'Hello world';
+\core\Application::setComponents([
+     'router' => new \core\components\Routing\Router(),
+     'view' => new \core\components\View\View()
+]);
+
+$app = \core\Application::getApp();
+$app->run();
