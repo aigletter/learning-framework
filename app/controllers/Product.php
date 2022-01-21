@@ -9,11 +9,18 @@ use core\components\View\View;
 
 class Product
 {
-    public function show()
+    public function __construct()
     {
-        $view = Application::getApp()->getView();
+        Application::getApp()->get('cache')->set('temp', 'Hello world!');
+    }
+
+    public function show(int $id, string $type)
+    {
+        $view = Application::getApp()->get('view');
         $view->view('product-show', [
-            'test' => 'Test var'
+            'id' => $id,
+            'test' => 'Test var',
+            'temp' => Application::getApp()->get('cache')->get('temp'),
         ]);
     }
 }
